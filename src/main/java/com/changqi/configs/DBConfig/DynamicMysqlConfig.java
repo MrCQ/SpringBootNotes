@@ -26,7 +26,7 @@ import java.util.Map;
 @Configuration
 //@Import({MasterMysqlConfig.class, SlaveMysqlConfig.class})
 public class DynamicMysqlConfig {
-    static final String MAPPER_LOCATION = "classpath:mapper/master/*.xml";
+    static final String MAPPER_LOCATION = "classpath:mapper/*.xml";
 
 
     @Bean(name = "masterDataSource")
@@ -69,7 +69,8 @@ public class DynamicMysqlConfig {
             throws Exception {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dynamicDataSource);
-        //sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(DynamicMysqlConfig.MAPPER_LOCATION));
+        //根据传统的XML配置
+        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(DynamicMysqlConfig.MAPPER_LOCATION));
         return sessionFactory.getObject();
     }
 }

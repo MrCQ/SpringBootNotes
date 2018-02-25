@@ -18,4 +18,7 @@ public interface AccountMapper {
 
     @Delete("delete from account where username = #{username}")
     void delete(String username);
+
+    @Select("select * from account where username = #{username}")
+    AccountEntity getAccountByName(@Param("username") String username);
 }
